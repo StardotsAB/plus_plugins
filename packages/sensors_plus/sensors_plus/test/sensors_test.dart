@@ -13,7 +13,7 @@ void main() {
 
   test('accelerometerEvents are streamed', () async {
     const channelName = 'dev.fluttercommunity.plus/sensors/accelerometer';
-    const sensorData = <double>[1.0, 2.0, 3.0];
+    const sensorData = [1.0, 2.0, 3.0, 1234567890];
     _initializeFakeMethodChannel('setAccelerationSamplingPeriod');
     _initializeFakeSensorChannel(channelName, sensorData);
 
@@ -22,11 +22,12 @@ void main() {
     expect(event.x, sensorData[0]);
     expect(event.y, sensorData[1]);
     expect(event.z, sensorData[2]);
+    expect(event.t, sensorData[3]);
   });
 
   test('gyroscopeEvents are streamed', () async {
     const channelName = 'dev.fluttercommunity.plus/sensors/gyroscope';
-    const sensorData = <double>[3.0, 4.0, 5.0];
+    const sensorData = [3.0, 4.0, 5.0, 1234567890];
     _initializeFakeMethodChannel('setGyroscopeSamplingPeriod');
     _initializeFakeSensorChannel(channelName, sensorData);
 
@@ -35,11 +36,12 @@ void main() {
     expect(event.x, sensorData[0]);
     expect(event.y, sensorData[1]);
     expect(event.z, sensorData[2]);
+    expect(event.t, sensorData[3]);
   });
 
   test('userAccelerometerEvents are streamed', () async {
     const channelName = 'dev.fluttercommunity.plus/sensors/user_accel';
-    const sensorData = <double>[6.0, 7.0, 8.0];
+    const sensorData = [6.0, 7.0, 8.0, 1234567890];
     _initializeFakeMethodChannel('setUserAccelerometerSamplingPeriod');
     _initializeFakeSensorChannel(channelName, sensorData);
 
@@ -48,11 +50,12 @@ void main() {
     expect(event.x, sensorData[0]);
     expect(event.y, sensorData[1]);
     expect(event.z, sensorData[2]);
+    expect(event.t, sensorData[3]);
   });
 
   test('magnetometerEvents are streamed', () async {
     const channelName = 'dev.fluttercommunity.plus/sensors/magnetometer';
-    const sensorData = <double>[8.0, 9.0, 10.0];
+    const sensorData = [8.0, 9.0, 10.0, 1234567890];
     _initializeFakeMethodChannel('setMagnetometerSamplingPeriod');
     _initializeFakeSensorChannel(channelName, sensorData);
 
@@ -61,6 +64,7 @@ void main() {
     expect(event.x, sensorData[0]);
     expect(event.y, sensorData[1]);
     expect(event.z, sensorData[2]);
+    expect(event.t, sensorData[3]);
   });
 }
 
@@ -79,7 +83,7 @@ void _initializeFakeMethodChannel(String methodName) {
   });
 }
 
-void _initializeFakeSensorChannel(String channelName, List<double> sensorData) {
+void _initializeFakeSensorChannel(String channelName, List sensorData) {
   const standardMethod = StandardMethodCodec();
 
   void emitEvent(ByteData? event) {

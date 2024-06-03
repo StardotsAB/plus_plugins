@@ -6,8 +6,8 @@
 /// and measures the velocity of the device. However, unlike
 /// [AccelerometerEvent], this event does not include the effects of gravity.
 class UserAccelerometerEvent {
-  /// Constructs an instance with the given [x], [y], and [z] values.
-  UserAccelerometerEvent(this.x, this.y, this.z);
+  /// Constructs an instance with the given [x], [y], [z] and [t] values.
+  UserAccelerometerEvent(this.x, this.y, this.z, this.t);
 
   /// Acceleration force along the x axis (excluding gravity) measured in m/s^2.
   ///
@@ -29,6 +29,9 @@ class UserAccelerometerEvent {
   /// towards the user and negative mean it is moving away from them.
   final double z;
 
+  /// The time in nanoseconds at which the event happened.
+  final int t;
+
   @override
-  String toString() => '[UserAccelerometerEvent (x: $x, y: $y, z: $z)]';
+  String toString() => '[UserAccelerometerEvent (x: $x, y: $y, z: $z, t: $t)]';
 }

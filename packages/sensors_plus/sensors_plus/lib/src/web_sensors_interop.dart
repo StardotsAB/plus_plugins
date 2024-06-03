@@ -11,6 +11,7 @@ extension type Accelerometer._(JSObject _) implements JSObject {
   external double get x;
   external double get y;
   external double get z;
+  external int get t;
 
   external set onreading(JSFunction callback);
   external set onerror(JSFunction callback);
@@ -29,6 +30,7 @@ extension type Gyroscope._(JSObject _) implements JSObject {
   external double get x;
   external double get y;
   external double get z;
+  external int get t;
 
   external set onreading(JSFunction callback);
   external set onerror(JSFunction callback);
@@ -47,6 +49,7 @@ extension type LinearAccelerationSensor._(JSObject _) implements JSObject {
   external double get x;
   external double get y;
   external double get z;
+  external int get t;
 
   external set onreading(JSFunction callback);
   external set onerror(JSFunction callback);
@@ -65,6 +68,7 @@ extension type Magnetometer._(JSObject _) implements JSObject {
   external double get x;
   external double get y;
   external double get z;
+  external int get t;
 
   external set onreading(JSFunction callback);
   external set onerror(JSFunction callback);

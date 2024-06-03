@@ -51,8 +51,13 @@ class MethodChannelSensors extends SensorsPlatform {
     _accelerometerEvents ??= _accelerometerEventChannel
         .receiveBroadcastStream()
         .map((dynamic event) {
-      final list = event.cast<double>();
-      return AccelerometerEvent(list[0]!, list[1]!, list[2]!);
+      final list = event.cast();
+      return AccelerometerEvent(
+        list[0] as double,
+        list[1] as double,
+        list[2] as double,
+        list[3] as int,
+      );
     });
     return _accelerometerEvents!;
   }
@@ -76,8 +81,13 @@ class MethodChannelSensors extends SensorsPlatform {
     _methodChannel.invokeMethod('setGyroscopeSamplingPeriod', microseconds);
     _gyroscopeEvents ??=
         _gyroscopeEventChannel.receiveBroadcastStream().map((dynamic event) {
-      final list = event.cast<double>();
-      return GyroscopeEvent(list[0]!, list[1]!, list[2]!);
+      final list = event.cast();
+      return GyroscopeEvent(
+        list[0] as double,
+        list[1] as double,
+        list[2] as double,
+        list[3] as int,
+      );
     });
     return _gyroscopeEvents!;
   }
@@ -103,8 +113,13 @@ class MethodChannelSensors extends SensorsPlatform {
     _userAccelerometerEvents ??= _userAccelerometerEventChannel
         .receiveBroadcastStream()
         .map((dynamic event) {
-      final list = event.cast<double>();
-      return UserAccelerometerEvent(list[0]!, list[1]!, list[2]!);
+      final list = event.cast();
+      return UserAccelerometerEvent(
+        list[0] as double,
+        list[1] as double,
+        list[2] as double,
+        list[3] as int,
+      );
     });
     return _userAccelerometerEvents!;
   }
@@ -128,8 +143,13 @@ class MethodChannelSensors extends SensorsPlatform {
     _methodChannel.invokeMethod('setMagnetometerSamplingPeriod', microseconds);
     _magnetometerEvents ??=
         _magnetometerEventChannel.receiveBroadcastStream().map((dynamic event) {
-      final list = event.cast<double>();
-      return MagnetometerEvent(list[0]!, list[1]!, list[2]!);
+      final list = event.cast();
+      return MagnetometerEvent(
+        list[0] as double,
+        list[1] as double,
+        list[2] as double,
+        list[3] as int,
+      );
     });
     return _magnetometerEvents!;
   }

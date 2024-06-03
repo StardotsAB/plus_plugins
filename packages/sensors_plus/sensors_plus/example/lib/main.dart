@@ -81,140 +81,155 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Sensors Plus Example'),
         elevation: 4,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Center(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border.all(width: 1.0, color: Colors.black38),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Center(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1.0, color: Colors.black38),
+                  ),
+                  child: SizedBox(
+                    height: _snakeRows * _snakeCellSize,
+                    width: _snakeColumns * _snakeCellSize,
+                    child: Snake(
+                      rows: _snakeRows,
+                      columns: _snakeColumns,
+                      cellSize: _snakeCellSize,
+                    ),
+                  ),
+                ),
               ),
-              child: SizedBox(
-                height: _snakeRows * _snakeCellSize,
-                width: _snakeColumns * _snakeCellSize,
-                child: Snake(
-                  rows: _snakeRows,
-                  columns: _snakeColumns,
-                  cellSize: _snakeCellSize,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Table(
+                  columnWidths: const {
+                    0: FlexColumnWidth(4),
+                    4: FlexColumnWidth(2),
+                  },
+                  children: [
+                    const TableRow(
+                      children: [
+                        SizedBox.shrink(),
+                        Text('X'),
+                        Text('Y'),
+                        Text('Z'),
+                        Text('T'),
+                        Text('Interval'),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text('UserAccelerometer'),
+                        ),
+                        Text(_userAccelerometerEvent?.x.toStringAsFixed(1) ??
+                            '?'),
+                        Text(_userAccelerometerEvent?.y.toStringAsFixed(1) ??
+                            '?'),
+                        Text(_userAccelerometerEvent?.z.toStringAsFixed(1) ??
+                            '?'),
+                        Text(_userAccelerometerEvent?.t.toString() ?? '?'),
+                        Text(
+                            '${_userAccelerometerLastInterval?.toString() ?? '?'} ms'),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text('Accelerometer'),
+                        ),
+                        Text(_accelerometerEvent?.x.toStringAsFixed(1) ?? '?'),
+                        Text(_accelerometerEvent?.y.toStringAsFixed(1) ?? '?'),
+                        Text(_accelerometerEvent?.z.toStringAsFixed(1) ?? '?'),
+                        Text(_accelerometerEvent?.t.toString() ?? '?'),
+                        Text(
+                            '${_accelerometerLastInterval?.toString() ?? '?'} ms'),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text('Gyroscope'),
+                        ),
+                        Text(_gyroscopeEvent?.x.toStringAsFixed(1) ?? '?'),
+                        Text(_gyroscopeEvent?.y.toStringAsFixed(1) ?? '?'),
+                        Text(_gyroscopeEvent?.z.toStringAsFixed(1) ?? '?'),
+                        Text(_gyroscopeEvent?.t.toString() ?? '?'),
+                        Text('${_gyroscopeLastInterval?.toString() ?? '?'} ms'),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text('Magnetometer'),
+                        ),
+                        Text(_magnetometerEvent?.x.toStringAsFixed(1) ?? '?'),
+                        Text(_magnetometerEvent?.y.toStringAsFixed(1) ?? '?'),
+                        Text(_magnetometerEvent?.z.toStringAsFixed(1) ?? '?'),
+                        Text(_magnetometerEvent?.t.toString() ?? '?'),
+                        Text(
+                            '${_magnetometerLastInterval?.toString() ?? '?'} ms'),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Table(
-              columnWidths: const {
-                0: FlexColumnWidth(4),
-                4: FlexColumnWidth(2),
-              },
-              children: [
-                const TableRow(
-                  children: [
-                    SizedBox.shrink(),
-                    Text('X'),
-                    Text('Y'),
-                    Text('Z'),
-                    Text('Interval'),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('UserAccelerometer'),
-                    ),
-                    Text(_userAccelerometerEvent?.x.toStringAsFixed(1) ?? '?'),
-                    Text(_userAccelerometerEvent?.y.toStringAsFixed(1) ?? '?'),
-                    Text(_userAccelerometerEvent?.z.toStringAsFixed(1) ?? '?'),
-                    Text(
-                        '${_userAccelerometerLastInterval?.toString() ?? '?'} ms'),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Accelerometer'),
-                    ),
-                    Text(_accelerometerEvent?.x.toStringAsFixed(1) ?? '?'),
-                    Text(_accelerometerEvent?.y.toStringAsFixed(1) ?? '?'),
-                    Text(_accelerometerEvent?.z.toStringAsFixed(1) ?? '?'),
-                    Text('${_accelerometerLastInterval?.toString() ?? '?'} ms'),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Gyroscope'),
-                    ),
-                    Text(_gyroscopeEvent?.x.toStringAsFixed(1) ?? '?'),
-                    Text(_gyroscopeEvent?.y.toStringAsFixed(1) ?? '?'),
-                    Text(_gyroscopeEvent?.z.toStringAsFixed(1) ?? '?'),
-                    Text('${_gyroscopeLastInterval?.toString() ?? '?'} ms'),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Magnetometer'),
-                    ),
-                    Text(_magnetometerEvent?.x.toStringAsFixed(1) ?? '?'),
-                    Text(_magnetometerEvent?.y.toStringAsFixed(1) ?? '?'),
-                    Text(_magnetometerEvent?.z.toStringAsFixed(1) ?? '?'),
-                    Text('${_magnetometerLastInterval?.toString() ?? '?'} ms'),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Update Interval:'),
-              SegmentedButton(
-                segments: [
-                  ButtonSegment(
-                    value: SensorInterval.gameInterval,
-                    label: Text('Game\n'
-                        '(${SensorInterval.gameInterval.inMilliseconds}ms)'),
-                  ),
-                  ButtonSegment(
-                    value: SensorInterval.uiInterval,
-                    label: Text('UI\n'
-                        '(${SensorInterval.uiInterval.inMilliseconds}ms)'),
-                  ),
-                  ButtonSegment(
-                    value: SensorInterval.normalInterval,
-                    label: Text('Normal\n'
-                        '(${SensorInterval.normalInterval.inMilliseconds}ms)'),
-                  ),
-                  const ButtonSegment(
-                    value: Duration(milliseconds: 500),
-                    label: Text('500ms'),
-                  ),
-                  const ButtonSegment(
-                    value: Duration(seconds: 1),
-                    label: Text('1s'),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Update Interval:'),
+                  SegmentedButton(
+                    segments: [
+                      ButtonSegment(
+                        value: SensorInterval.gameInterval,
+                        label: Text('Game\n'
+                            '(${SensorInterval.gameInterval.inMilliseconds}ms)'),
+                      ),
+                      ButtonSegment(
+                        value: SensorInterval.uiInterval,
+                        label: Text('UI\n'
+                            '(${SensorInterval.uiInterval.inMilliseconds}ms)'),
+                      ),
+                      ButtonSegment(
+                        value: SensorInterval.normalInterval,
+                        label: Text('Normal\n'
+                            '(${SensorInterval.normalInterval.inMilliseconds}ms)'),
+                      ),
+                      const ButtonSegment(
+                        value: Duration(milliseconds: 500),
+                        label: Text('500ms'),
+                      ),
+                      const ButtonSegment(
+                        value: Duration(seconds: 1),
+                        label: Text('1s'),
+                      ),
+                    ],
+                    selected: {sensorInterval},
+                    showSelectedIcon: false,
+                    onSelectionChanged: (value) {
+                      setState(() {
+                        sensorInterval = value.first;
+                        userAccelerometerEventStream(
+                            samplingPeriod: sensorInterval);
+                        accelerometerEventStream(
+                            samplingPeriod: sensorInterval);
+                        gyroscopeEventStream(samplingPeriod: sensorInterval);
+                        magnetometerEventStream(samplingPeriod: sensorInterval);
+                      });
+                    },
                   ),
                 ],
-                selected: {sensorInterval},
-                showSelectedIcon: false,
-                onSelectionChanged: (value) {
-                  setState(() {
-                    sensorInterval = value.first;
-                    userAccelerometerEventStream(
-                        samplingPeriod: sensorInterval);
-                    accelerometerEventStream(samplingPeriod: sensorInterval);
-                    gyroscopeEventStream(samplingPeriod: sensorInterval);
-                    magnetometerEventStream(samplingPeriod: sensorInterval);
-                  });
-                },
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -68,7 +68,14 @@ internal class StreamHandlerImpl(
                 event.values.forEachIndexed { index, value ->
                     sensorValues[index] = value.toDouble()
                 }
-                events.success(sensorValues)
+                events.success(
+                    arrayOf(
+                        sensorValues[0],
+                        sensorValues[1],
+                        sensorValues[2],
+                        event.timestamp
+                    ).toList()
+                )
             }
         }
     }

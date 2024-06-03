@@ -9,15 +9,18 @@
 ///
 /// A compass is an example of a general utility for magnetometer data.
 class MagnetometerEvent {
-  /// Constructs a new instance with the given [x], [y], and [z] values.
+  /// Constructs a new instance with the given [x], [y], [z] and [t] values.
   ///
   /// See [MagnetometerEvent] for more information.
-  MagnetometerEvent(this.x, this.y, this.z);
+  MagnetometerEvent(this.x, this.y, this.z, this.t);
 
   /// The ambient magnetic field in this axis surrounding the sensor in
   /// microteslas ***μT***.
   final double x, y, z;
 
+  /// The time in nanoseconds at which the event happened.
+  final int t;
+
   @override
-  String toString() => '[MagnetometerEvent (x: $x, y: $y, z: $z)]';
+  String toString() => '[MagnetometerEvent (x: $x, y: $y, z: $z, t: $t)]';
 }

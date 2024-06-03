@@ -5,8 +5,8 @@
 /// Discrete reading from a gyroscope. Gyroscopes measure the rate or rotation of
 /// the device in 3D space.
 class GyroscopeEvent {
-  /// Constructs an instance with the given [x], [y], and [z] values.
-  GyroscopeEvent(this.x, this.y, this.z);
+  /// Constructs an instance with the given [x], [y], [z] and [t] values.
+  GyroscopeEvent(this.x, this.y, this.z, this.t);
 
   /// Rate of rotation around the x axis measured in rad/s.
   ///
@@ -30,6 +30,9 @@ class GyroscopeEvent {
   /// on.
   final double z;
 
+  /// The time in nanoseconds at which the event happened.
+  final int t;
+
   @override
-  String toString() => '[GyroscopeEvent (x: $x, y: $y, z: $z)]';
+  String toString() => '[GyroscopeEvent (x: $x, y: $y, z: $z, t: $t)]';
 }

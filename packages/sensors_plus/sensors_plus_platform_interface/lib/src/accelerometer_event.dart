@@ -7,8 +7,8 @@
 /// simply, you can use accelerometer readings to tell if the device is moving in
 /// a particular direction.
 class AccelerometerEvent {
-  /// Constructs an instance with the given [x], [y], and [z] values.
-  AccelerometerEvent(this.x, this.y, this.z);
+  /// Constructs an instance with the given [x], [y], [z] and [t] values.
+  AccelerometerEvent(this.x, this.y, this.z, this.t);
 
   /// Acceleration force along the x axis (including gravity) measured in m/s^2.
   ///
@@ -30,6 +30,9 @@ class AccelerometerEvent {
   /// towards the user and negative mean it is moving away from them.
   final double z;
 
+  /// The time in nanoseconds at which the event happened.
+  final int t;
+
   @override
-  String toString() => '[AccelerometerEvent (x: $x, y: $y, z: $z)]';
+  String toString() => '[AccelerometerEvent (x: $x, y: $y, z: $z, t: $t)]';
 }
