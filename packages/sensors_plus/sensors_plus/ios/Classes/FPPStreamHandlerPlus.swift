@@ -24,17 +24,15 @@ func _initMotionManager() {
     }
 }
 
-func sendTriplet(x: Float64, y: Float64, z: Float64, sink: @escaping FlutterEventSink) {
+func sendTriplet(x: Float64, y: Float64, z: Float64, t: Int, sink: @escaping FlutterEventSink) {
     if _isCleanUp {
         return
     }
     // Even after [detachFromEngineForRegistrar] some events may still be received
     // and fired until fully detached.
     DispatchQueue.main.async {
-        let triplet = [x, y, z]
-        triplet.withUnsafeBufferPointer { buffer in
-            sink(FlutterStandardTypedData.init(float64: Data(buffer: buffer)))
-        }
+        let triplet: [Any] = [x, y, z, t]
+        sink(triplet)
     }
 }
 
@@ -71,6 +69,7 @@ class FPPAccelerometerStreamHandlerPlus: NSObject, MotionStreamHandler {
                     x: -acceleration.x * GRAVITY,
                     y: -acceleration.y * GRAVITY,
                     z: -acceleration.z * GRAVITY,
+                    t: data!.timestamp * 1000000000,
                     sink: sink
             )
         }
@@ -120,6 +119,7 @@ class FPPUserAccelStreamHandlerPlus: NSObject, MotionStreamHandler {
                     x: -acceleration.x * GRAVITY,
                     y: -acceleration.y * GRAVITY,
                     z: -acceleration.z * GRAVITY,
+                    t: data!.timestamp * 1000000000,
                     sink: sink
             )
         }
@@ -163,7 +163,13 @@ class FPPGyroscopeStreamHandlerPlus: NSObject, MotionStreamHandler {
                 return
             }
             let rotationRate = data!.rotationRate
-            sendTriplet(x: rotationRate.x, y: rotationRate.y, z: rotationRate.z, sink: sink)
+            sendTriplet(
+                    x: rotationRate.x,
+                    y: rotationRate.y,
+                    z: rotationRate.z,
+                    t: data!.timestamp * 1000000000,
+                    sink: sink
+            )
         }
         return nil
     }
@@ -205,7 +211,13 @@ class FPPMagnetometerStreamHandlerPlus: NSObject, MotionStreamHandler {
                 return
             }
             let magneticField = data!.magneticField
-            sendTriplet(x: magneticField.x, y: magneticField.y, z: magneticField.z, sink: sink)
+            sendTriplet(
+                    x: magneticField.x,
+                    y: magneticField.y,
+                    z: magneticField.z,
+                    t: data!.timestamp * 1000000000,
+                    sink: sink
+            )
         }
         return nil
     }
