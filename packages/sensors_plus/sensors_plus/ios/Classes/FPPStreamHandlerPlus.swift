@@ -69,7 +69,7 @@ class FPPAccelerometerStreamHandlerPlus: NSObject, MotionStreamHandler {
                     x: -acceleration.x * GRAVITY,
                     y: -acceleration.y * GRAVITY,
                     z: -acceleration.z * GRAVITY,
-                    t: data!.timestamp * 1000000000,
+                    t: Int(data!.timestamp * 1000000000),
                     sink: sink
             )
         }
@@ -119,7 +119,7 @@ class FPPUserAccelStreamHandlerPlus: NSObject, MotionStreamHandler {
                     x: -acceleration.x * GRAVITY,
                     y: -acceleration.y * GRAVITY,
                     z: -acceleration.z * GRAVITY,
-                    t: data!.timestamp * 1000000000,
+                    t: Int(data!.timestamp * 1000000000),
                     sink: sink
             )
         }
@@ -167,7 +167,7 @@ class FPPGyroscopeStreamHandlerPlus: NSObject, MotionStreamHandler {
                     x: rotationRate.x,
                     y: rotationRate.y,
                     z: rotationRate.z,
-                    t: data!.timestamp * 1000000000,
+                    t: Int(data!.timestamp * 1000000000),
                     sink: sink
             )
         }
@@ -215,7 +215,7 @@ class FPPMagnetometerStreamHandlerPlus: NSObject, MotionStreamHandler {
                     x: magneticField.x,
                     y: magneticField.y,
                     z: magneticField.z,
-                    t: data!.timestamp * 1000000000,
+                    t: Int(data!.timestamp * 1000000000),
                     sink: sink
             )
         }
